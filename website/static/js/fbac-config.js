@@ -55,4 +55,6 @@ const concierge = new FBAC.default({
   ]
 });
 
-concierge.init();
+setTimeout(() => {
+  concierge.init();
+}, 10);

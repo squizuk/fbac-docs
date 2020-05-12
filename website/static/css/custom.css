@@ -237,6 +237,10 @@ a:visited {
   background-color: violet;
 }
 
+form {
+  margin-top: 10px;
+}
+
 @keyframes loader {
   0% {
     transform: rotate(0deg);
