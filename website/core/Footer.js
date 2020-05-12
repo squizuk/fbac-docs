@@ -51,7 +51,7 @@ class Footer extends React.Component {
           <div>
             <h5>More</h5>
             <a href={`${this.props.config.baseUrl}blog`}>Changelog</a>
-            <a href="mailto:achatys@squiz.co.uk">Contact</a>
+            <a href="mailto:jsawczyszyn@squiz.pl">Contact</a>
           </div>
         </section>
         <section className="copyright">{this.props.config.copyright}</section>

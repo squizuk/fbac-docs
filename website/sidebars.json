@@ -1,42 +1,14 @@
 {
   "docs": {
-    "Getting Started": ["installation", "features", "basicconcepts", "tutorial"],
+    "Getting Started": ["installation", "basicconcepts", "tutorial"],
     "Configuration": [
       "overview",
       "general",
-      "query",
-      "results",
-      "pagination",
-      "scroll",
-      "information",
-      "sort",
-      "search",
-      "location",
-      "facets",
-      "activefacets",
-      "contextualnavigation",
-      "loader",
-      "bestbets",
-      "noresults",
+      "urlParts",
+      "target-class",
+      "behaviour",
+      "display",
       "events"
-    ],
-    "Templates": [
-      "overviewtemplate",
-      "articletemplate",
-      "sorttemplate",
-      "informationtemplate",
-      "formtemplate",
-      "locationtemplate",
-      "paginationtemplate",
-      "facetstemplate",
-      "contextualnavigationtemplate",
-      "loadertemplate",
-      "bestbettemplate",
-      "activefacetstemplate",
-      "noresultstemplate"
-    ],
-    "Events": [
-      "configupdate"
     ]
   },
   "docs-other": {

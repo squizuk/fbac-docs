@@ -1,19 +1,42 @@
 ---
 id: features
-title: FBJS Features
+title: FBAC Features
 ---
 
-Before you decide to use FBJS on your project, you should check if there's enough features available for your requirements.
+Before you decide to use FBAC on your project, you should check if there's enough features available for your requirements.
 
 ## General
+
 - It's possible to define starting query of search
 - You can add starting parameters to funnelback endpoint request
 - You can initialize your own functions when there's change in facets or when search happens
 - Every single part of search page can have it's individual html template and declared place in DOM
 
-## Search Bar
+## Global Header
 
-- You can have a input field on your search page which will reload the content of the page after typing the query.
+{query}
+
+## Global Footer
+
+{query}
+
+## No Results
+
+{query}
+
+## Results
+
+- It's possible to use more then one Funnelback collection
+
+### Header
+
+### Result
+
+### Footer
+
+<!-- ## Search Bar -->
+
+<!-- - You can have a input field on your search page which will reload the content of the page after typing the query.
 - It's possible to replace the content of input fields after each search using JavaScript.
 
 ## Information Bar
@@ -39,7 +62,6 @@ Before you decide to use FBJS on your project, you should check if there's enoug
 - You can decide how many articles per page should be visible.
 - You can create own styling of that element.
 
-
 ## Pagination
 
 - You can choose between "load more" or "classic" pagination
@@ -51,5 +73,4 @@ Before you decide to use FBJS on your project, you should check if there's enoug
 ## Active facets
 
 - You can print facets that were selected as a list of buttons
-- Clicking on one of the buttons can unselect particular facet
-
+- Clicking on one of the buttons can unselect particular facet -->

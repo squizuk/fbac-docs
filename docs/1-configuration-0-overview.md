@@ -3,185 +3,194 @@ id: overview
 title: Overview
 ---
 
-Configuration is an object that you add in your JavaScript file. It allows you to initialize FBJS and customise it to your needs. It is split to few different categories, which makes it easier to understand the concept behind it. Most of the fields within configuration has it's default state, which you don't need to update or overwrite unless you want to change it.
+Configuration is an object that you add in your JavaScript file. It allows you to initialize FBAC and customise it to your needs. It is split to few different categories, which makes it easier to understand the concept behind it. Most of the fields within configuration has it's default state, which you don't need to update or overwrite unless you want to change it.
 
 In next chapters, you will learn about each of the fields that you may use for your configuration.
 
-| Parameter 	  | Type 	     | Default value 	| Required 	|
-|-------------	|----------- |--------------	|----------	|
-| **General** | | | |
-| [`url`](1-configuration-1-general.md#url-funnelback-url)         | `string` | `''`        	    | yes       |
-| [`collections`](1-configuration-1-general.md#collections-funnelback-collection) | `array of strings` | `[]`   | yes       |
-| [`additionalFBparams`](1-configuration-1-general.md#additionalfbparams-additional-parameters) | `object`   | `{}`          | no        |
-| [`activeFacetsOnStart`](1-configuration-1-general.md#activefacetsonstart-active-facets-on-start) | `object`   | `{}`          | no        |
-| [`shouldFacetsFromUrl OverwriteActiveFacets`](1-configuration-1-general.md#shouldfacetsfromurloverwriteactivefacets-active-facets-priority) | `boolean`   | `false`          | no        |
-| [`updateUrlOnSearch`](1-configuration-1-general.md#updateurlonsearch-update-url-after-new-search) | `boolean`   | `true`          | no        |
-| [`keepSearchHistory`](1-configuration-1-general.md#keepsearchhistory-keep-history-of-search-in-browser) | `boolean`   | `true`          | no        |
-| **Query** | | | |
-| [`query > value`](1-configuration-2-query.md#value-value-of-query)         | `string` | `'!nullsearch'`        	    | no       |
-| [`query > canBeChanged`](1-configuration-2-query.md#canbechanged-can-the-query-be-changed) | `bollean` | `true`   | no       |
-| **Results** | | | |
-| [`results > target`](1-configuration-3-results.md#target-location-of-results-in-dom)         | `string` | `'.results'`        	    | no       |
-| [`results > numRanks`](1-configuration-3-results.md#numranks-number-of-results-per-page) | `number` | `15`   | no       |
-| [`results > startRank`](1-configuration-3-results.md#startrank-starting-search-result) | `number` | `1`   | no       |
-| [`results > highlight`](1-configuration-3-results.md#highlight-highlight-query-in-search-results) | `bollean` | `true`   | no       |
-| [`results > highlightClass`](1-configuration-3-results.md#highlightclass-class-for-highlight-span) | `string` | `highlight`   | no       |
-| **Pagination** | | | |
-| [`pagination > target`](1-configuration-4-pagination.md#target-location-of-results-in-dom)         | `string` | `'.pagination'`        	    | no       |
-| [`pagination > loadMore`](1-configuration-4-pagination.md#loadmore-change-loading-type-to-load-more) | `boolean` | `false`   | no       |
-| [`pagination > arrows`](1-configuration-4-pagination.md#arrows-show-arrows-on-pagination-sides) | `boolean` | `true`   | no       |
-| [`pagination > arrowsOnEdgePages`](1-configuration-4-pagination.md#arrowsonedgepages-show-arrows-on-pagination-when-being-on-1st-or-last-page) | `boolean` | `false`   | no       |
-| [`pagination > dots`](1-configuration-4-pagination.md#dots-show-dots-between-pages) | `boolean` | `true`   | no       |
-| [`pagination > edgePages`](1-configuration-4-pagination.md#edgepages-show-first-and-last-page-if-there-s-a-lot-of-pages) | `boolean` | `true`   | no       |
-| [`pagination > pages`](1-configuration-4-pagination.md#pages-amount-of-pages-on-sides-of-active-page) | `number` | `2`   | no       |
-| **Scroll** | | | |
-| [`scroll > enable`](1-configuration-5-scroll.md#enable-decide-if-you-want-to-use-the-feature)         | `boolean` | `false`        	    | no       |
-| [`scroll > target`](1-configuration-5-scroll.md#target-fbjs-will-scroll-up-to-the-top-of-target-element)         | `string` | `'.results'`        	    | no       |
-| [`scroll > offset`](1-configuration-5-scroll.md#offset-offset-on-scroll)         | `string` | `'50'`        	    | no       |
-| [`scroll > animation`](1-configuration-5-scroll.md#animation-type-of-animation)         | `string` | `'smooth'`        	    | no       |
-| **Information** | | | |
-| [`information > target`](1-configuration-6-information.md#target-location-of-results-in-dom)         | `string` | `'.information'`        	    | no       |
-| **Sort** | | | |
-| [`sort > target`](1-configuration-7-sort.md#target-location-of-results-in-dom)         | `string` | `'.sort'`        	    | no       |
-| [`sort > type`](1-configuration-7-sort.md#type-default-sort-type)         | `string` | `'relevance'`        	    | no       |
-| **Search** | | | |
-| [`search > target`](1-configuration-8-search.md/#target-location-of-results-in-dom)         | `string` | `'.form'`        	    | no       |
-| [`search > inputId`](1-configuration-8-search.md/#inputid-id-of-the-main-search-input)         | `string` | `'search-queryinput'`        	    | no       |
-| [`search > resetFacets`](1-configuration-8-search.md/#resetfacets-resets-selected-facets-on-new-search)         | `boolean` | `true`        	    | no       |
-| **Location** | | | |
-| [`location > target`](1-configuration-9-location.md#target-location-of-results-in-dom)         | `string` | `'.location-form'`        	    | no       |
-| [`location > inputId`](1-configuration-9-location.md#inputid-id-of-the-location-search-input)         | `string` | `'search-locationquery'`        	    | no       |
-| [`location > buttonId`](1-configuration-9-location.md#buttonid-id-of-the-button-for-current-location)    | `string` | `get-location-btn`        | no       |
-| [`location > maxDist`](1-configuration-9-location.md#maxdist-max-distance-of-result)         | `number` | `18000000`        	    | no       |
-| **Facets** | | | |
-| [`facets > target`](1-configuration-10-facets.md#onfiltersupdate-when-user-changes-filters)         | `string` | `'.facets'`        	    | no       |
-| [`facets > items`](1-configuration-10-facets.md#onnoresultspageupdate-when-there-are-no-results-for-query)         | `array` | `[]`        	    | no       |
-| **Active Facets** | | | |
-| [`activeFacets > target`](1-configuration-11-active-facets.md#target-location-of-results-in-dom)         | `string` | `'.active-facets'`        	    | no       |
-| **Contextual Navigation** | | | |
-| [`contextualNavigation > target`](1-configuration-12-contextualNavigation.md#target-location-of-results-in-dom)         | `string` | `'.context-nav'`        	    | no       |
-| [`contextualNavigation > items`](1-configuration-12-contextualNavigation.md#items-clusters-names) | `array of strings` | `[]` | no
-| **Loader** | | | |
-| [`loader > target`](1-configuration-13-loader.md#target-location-of-results-in-dom)         | `string` | `'.results'`        	    | no       |
-| [`loader > class`](1-configuration-13-loader.md#class-css-class-attached-to-loader) | `string` | `'.loader-cloak'` | no
-| **Best Bets** | | | |
-| [`bestBets: target`](1-configuration-14-bestBets.md#target-location-of-results-in-dom)         | `string` | `'.best-bets'`        	    | no       |
-| **No results** | | | |
-| [`noResults: target`](1-configuration-15-noResults.md#target-location-of-results-in-dom)         | `string` | `'.no-results'`        	    | no       |
-| **Events** | | | |
-| [`onFiltersUpdate`](1-configuration-16-events.md#onfiltersupdate-when-user-changes-filters)         | `function` | `() => {}`        	    | no       |
-| [`onNoResultsPageUpdate`](1-configuration-16-events.md#onnoresultspageupdate-when-there-are-no-results-for-query)         | `function` | `() => {}`        	    | no       |
-| [`onSearch`](1-configuration-16-events.md#onsearch-when-user-searches-for-query)         | `function` | `() => {}`        	    | no       |
+| Parameter                                                                                   | Type               | Default value                  | Required |
+| --------------------------------------------------------------------------------------------| ------------------ | ------------------------------ | -------- |
+| **General**                                                                                 |                    |                                |          |
+| [`input`](1-configuration-1-general.md#input)                                               | `string/object`    | `''`                           | yes      |
+| [`inject`](1-configuration-1-general.md#inject)                                             | `string/object`    | `''`                           | yes      |
+| [`url`](1-configuration-1-general.md#url)                                                   | `string`           | `''`                           | yes      |
+| [`fb`](1-configuration-1-general.md#fb)                                                     | `array of objects` | `[]`                           | yes      |
+| [`scaffold`](1-configuration-1-general.md#scaffold)                                         | `function`         | `(templates) => {}`            | yes      |
+| [`showOnFront`](1-configuration-1-general.md#showOnFront)                                   | `string/number`    | `''`                           | no       |
+| [`trigger`](1-configuration-1-general.md#trigger)                                           | `string/number`    | `3`                            | no       |
+| [`threshold`](1-configuration-1-general.md#threshold)                                       | `number`           | `200`                          | no       |
+| [`highlight`](1-configuration-1-general.md#highlight)                                       | `boolean`          | `false`                        | no       |
+| [`accessibility`](1-configuration-1-general.md#accessibility)                               | `boolean`          | `true`                         | no       |
+| [`loader`](1-configuration-1-general.md#loader)                                             | `boolean`          | `false`                        | no       |
+| [`bindEvents`](1-configuration-1-general.md#bindEvents)                                     | `boolean`          | `false`                        | no       |
+| [`globalTemplates`](1-configuration-1-general.md#globalTemplates)                           | `object`           | `{}`                           | no       |
+| **Url Parts**                                                                               |                    |                                |          |
+| [`urlParts > collection`](1-configuration-2-url-parts.md#collection)                        | `string`           | `''`                           | no       |
+| [`urlParts > profile`](1-configuration-2-url-parts.md#profile)                              | `string`           | `'_default'`                   | no       |
+| [`urlParts > show`](1-configuration-2-url-parts.md#show)                                    | `string/number`    | `10`                           | no       |
+| [`urlParts > sort`](1-configuration-2-url-parts.md#sort)                                    | `string/number`    | `0`                            | no       |
+| **Target Class**                                                                            |                    |                                |          |
+| [`targetClass > results`](1-configuration-3-target-class.md#results)                        | `string`           | `'fbac__results'`              | no       |
+| [`targetClass > conciergeResult`](1-configuration-3-target-class.md#conciergeResult)        | `string`           | `'fbac__result--concierge'`    | no       |
+| [`targetClass > autocompleteResult`](1-configuration-3-target-class.md#autocompleteResult)  | `string`           | `'fbac__result--autocomplete'` | no       |
+| [`targetClass > onOpen`](1-configuration-3-target-class.md#onOpen)                          | `string`           | `'fbac__active'`               | no       |
+| [`targetClass > onFocus`](1-configuration-3-target-class.md#onFocus)                        | `string`           | `'fbac__focus'`                | no       |
+| [`targetClass > onHover`](1-configuration-3-target-class.md#onHover)                        | `string`           | `'fbac__hover'`                | no       |
+| **Behaviour**                                                                               |                    |                                |          |
+| [`behaviour > autocompleteClick`](1-configuration-4-behaviour.md#autocompleteClick)         | `string`           | `'submit'`                     | no       |
+| [`behaviour > autocompleteEnter`](1-configuration-4-behaviour.md#autocompleteEnter)         | `string`           | `'submit'`                     | no       |
+| [`behaviour > hoverIsFocus`](1-configuration-4-behaviour.md#hoverIsFocus)                   | `boolean`          | `true`                         | no       |
+| **Display**                                                                                 |                    |                                |          |
+| [`display > scaffoldOnNoResults`](1-configuration-5-display.md#scaffoldOnNoResults)         | `boolean`          | `true`                         | no       |
+| [`display > headerOnNoResults`](1-configuration-5-display.md#headerOnNoResults)             | `boolean`          | `true`                         | no       |
+| [`display > footerOnNoResults`](1-configuration-5-display.md#footerOnNoResults)             | `boolean`          | `true`                         | no       |
+| **Events**                                                                                  |                    |                                |          |
+| [`events > beforeInit`](1-configuration-6-events.md#beforeInit)                             | `function`         | `() => {}`                     | no       |
+| [`events > beforeFetch`](1-configuration-6-events.md#beforeFetch)                           | `function`         | `(query) => {}`                | no       |
+| [`events > afterFetch`](1-configuration-6-events.md#afterFetch)                             | `function`         | `(query, data) => {}`          | no       |
+| [`events > onResults`](1-configuration-6-events.md#onResults)                               | `function`         | `(query, data) => {}`          | no       |
+| [`events > onComplete`](1-configuration-6-events.md#onComplete)                             | `function`         | `(query, data) => {}`          | no       |
 
-#### Example of full default FBJS configuration
+
+#### Example of full default FBAC configuration
 
 ```js
-const defaultConfig = {
-  templates: {},
-  url: '',
-  query: {
-    value: '!nullsearch',
-    canBeChanged: true,
-  },
-  collections: [],
-  /**
-   * updateUrlOnSearch:
-   *  when searching or changing result pages - should the URL update to reflect changes?
-   */
-  additionalFBparams: {},
-  activeFacetsOnStart: {},
-  shouldFacetsFromUrlOverwriteActiveFacets: false,
-  updateUrlOnSearch: true,
-  keepSearchHistory: true,
-  results: {
-    target: '.results',
-    numRanks: 15,
-    startRank: 1,
-    highlight: true,
-    highlightClass: 'highlight',
-  },
-  pagination: {
-    target: '.pagination',
-    loadMore: false,
-    arrows: true,
-    arrowsOnEdgePages: false,
-    dots: true,
-    edgePages: true,
-    pages: 2,
-  },
-  information: {
-    target: '.information',
-  },
-  sort: {
-    target: '.sort',
-    type: 'relevance',
-  },
-  search: {
-    target: '.form',
-    inputId: 'search-queryinput',
-    resetFacets: true,
-  },
-  location: {
-    target: '.location-form',
-    inputId: 'search-locationquery',
-    buttonId: 'get-location-btn',
-    maxDist: 18000000,
-  },
-  facets: {
-    target: '.facets',
-    items: [],
-  },
-  activeFacets: {
-    target: '.active-facets',
-  },
-  contextualNavigation: {
-    target: '.context-nav',
-    items: []
-  },
-  loader: {
-    class: '.loader-cloak',
-    target: '.results',
-  },
-  bestBets: {
-    target: '.best-bets',
-  },
-  noResults: {
-    target: '.no-results',
-  },
-  onFiltersUpdate: () => {},
-  onNoResultsPageUpdate: () => {},
-  onSearch: () => {},
+const globalConfig = {
+    input: "",
+    inject: "",
+    url: "",
+    showOnFront: "",
+    trigger: 3,
+    threshold: 200,
+    highlight: false,
+    accessibility: true,
+    loader: false,
+
+    urlParts: {
+        collection: "",
+        profile: "_default",
+        show: "10",
+        sort: "0",
+    },
+    targetClass: {
+        results: "fbac__results",
+        conciergeResult: "fbac__result--concierge",
+        autocompleteResult: "fbac__result--autocomplete",
+        onOpen: "fbac__active",
+        onFocus: "fbac__focus",
+        onHover: "fbac__hover",
+    },
+    behaviour: {  
+        autocompleteClick: "submit",
+        autocompleteEnter: "submit",
+        hoverIsFocus: true,
+    },
+    display: {  
+        scaffoldOnNoResults: true,
+        headerOnNoResults: true,
+        footerOnNoResults: true,
+    },
+    bindEvents: false,
+    events: {
+        beforeInit() {},
+        beforeFetch(query) {},
+        afterFetch(query, data) {},
+        onResults(query, data) {},
+        onComplete(query, data) {},
+    },
+    scaffold(templates) {
+        return `
+        ${templates.noResults}
+
+        ${templates.header}
+
+        <div class="fbac__headers">
+        </div>
+
+        <div class="fbac__all-results">
+
+          <div class="fbac__autocomplete">
+            <div class="fbac__results">
+            </div>
+          </div>
+
+          <div class="fbac__divider"></div>
+
+          <div class="fbac__concierge">
+            <div class="fbac__results">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="fbac__footers">
+        </div>
+
+        ${templates.footer}
+      `;
+    },
+    globalTemplates: globalTemplates,
+    fb: [],
 };
+
 ```
 
-#### Example of simple FBJS configuration
+#### Example of simple FBAC configuration
 
 ```js
-const mySearch = new Search.default({
-    url: 'https://example.funnelback.co.uk/s/search.json',
-    collections: ['courses'],
-    results: {
-        numRanks: 10,
+const concierge = new FBAC.default({
+    input: "#search",
+    inject: "#fbac",
+    url: "https://mercator3-search01.squiz.co.uk/s/suggest.json",
+    urlParts: {
+        collection: "push-global-port-strategy"
     },
-    facets: {
-        items: [{
-            name: 'Level',
-            type: 'checkbox',
-            options: {
-                singleChoice: true,
-                facetsRestricted: true,
-            },
-        },
+    scaffold(templates) {
+        return `
+            ${templates.noResults}
+
+            ${templates.header}
+
+            <div class="fbac__headers">
+                ${templates.mercator_1.header}
+            </div>
+
+            <div class="fbac__all-results">
+                ${templates.mercator_1.results}
+            </div>
+
+            <div class="fbac__footers">
+                ${templates.mercator_1.footer}
+            </div>
+
+            ${templates.footer}
+        `;
+    },
+    fb: [
         {
-            name: 'College',
-            type: 'checkbox',
-            options: {
-                singleChoice: false,
-                facetsRestricted: true,
+            id: "mercator_1",
+            urlParts: {
+                collection: "push-meta-port-strategy"
             },
-        }],
-    },
+            display: {
+                headerOnNoResults: false,
+                footerOnNoResults: false
+            },
+            templates: {
+                results(iteratedResults, resultsClass) {
+                    return `
+                    <div class="fbac__autocomplete">
+                        <div class="${resultsClass}">
+                            ${iteratedResults}
+                        </div>
+                    </div>
+                    <div class="fbac__divider"></div>
+                  `;
+                }
+            }
+        },
+    ]
 });
 
-mySearch.init();
+concierge.init();
+
 ```

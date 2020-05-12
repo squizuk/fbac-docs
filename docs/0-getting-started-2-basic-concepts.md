@@ -3,64 +3,73 @@ id: basicconcepts
 title: Basic Concepts
 ---
 
-There are two basic concepts related with FBJS that help you to create your own Search Engine Results Page.
+There are two basic concepts related with FBAC that help you to create your own Search Engine Results Page.
 
-In order to make FBJS work you need to [install FBJS](0-getting-started-0-installation.md), create HTML markup for sections of search page and create configuration with settings and templates.
+In order to make FBAC work you need to [install FBAC](0-getting-started-0-installation.md), create HTML markup for sections of search page and create configuration with settings and templates.
 
 ## Configuration
 
-Configuration is an object that has properties with their default values in FBJS. You need to provide some of them as required fields for FBJS, rest of them is not mandatory.
+Configuration is an object that has properties with their default values in FBAC. You need to provide some of them as required fields for FBAC, rest of them is not mandatory.
 
-#### Example of simple FBJS configuration
+#### Example of simple FBAC configuration
 
 ```js
-const mySearch = new Search.default({
-    url: 'https://example.funnelback.co.uk/s/search.json',
-    collections: ['courses'],
-    results: {
-        numRanks: 10,
+const concierge = new FBAC.default({
+    input: "#search",
+    inject: "#fbac",
+    highlight: true,
+    scaffold(templates) {
+        return `
+            ${templates.noResults}
+
+            ${templates.header}
+
+            <div class="fbac__headers">
+                ${templates.test_name.header}
+            </div>
+
+            <div class="fbac__all-results">
+                ${templates.test_name.results}
+                ${templates.test_name.noResults}
+
+            </div>
+
+            <div class="fbac__footers">
+                ${templates.test_name.footer}
+            </div>
+
+            ${templates.footer}
+        `;
     },
-    facets: {
-        items: [{
-            name: 'Level',
-            type: 'checkbox',
-            options: {
-                singleChoice: true,
-                facetsRestricted: true,
-            },
-        },
+    url: "https://mercator3-search01.squiz.co.uk/s/suggest.json",
+    urlParts: {
+        collection: "push-global-port-strategy"
+    },
+    fb: [
         {
-            name: 'College',
-            type: 'checkbox',
-            options: {
-                singleChoice: false,
-                facetsRestricted: true,
+            id: "test_name",
+            urlParts: {
+                collection: "push-meta-port-strategy"
             },
-        }],
-    },
+            templates: {
+                results(iteratedResults, resultsClass) {
+                    return `
+                    <div class="fbac__autocomplete">
+                        <div class="${resultsClass}">
+                            ${iteratedResults}
+                        </div>
+                    </div>
+                    <div class="fbac__divider"></div>
+                  `;
+                }
+            }
+        }
+    ]
 });
 
-mySearch.init();
+concierge.init();
+
 ```
 
 > You will learn more about configuration in dedicated chapter
 
-## Templates
-
-Each part of the search engine results page has it's own template which allows you to customise it to your needs. Each templates is represented by a function that you pass to object in configuration.
-
-#### Example of template for single article in results list
-
-```js
-articleTemplate: (fields, highlightFields) => {
-    return `
-        <div>
-            <h1>${highlightFields.title}</h1>
-            <div>${fields.kmFromOrigin}</div>
-            <p><a href="${fields.clickTrackingUrl}">Read more</a></p>
-        </div>
-    `;
-  },
-```
-
-> You will learn more about templates in dedicated chapter

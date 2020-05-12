@@ -6,42 +6,93 @@ title: General configuration
 The whole object of configuration should be injected below the fbjs library file.
 
 ```js
-const mySearch = new Search.default({
+const concierge = new FBAC.default({
     // your configuration
 });
 
 mySearch.init();
 ```
 
-There are some general config fields that you will use to configure your fbjs instance.
+There are some general config fields that you will use to configure your fbac instance.
 
 ## Summary
 
 | Parameter 	  | Type 	     | Default value 	| Required 	|
 |-------------	|----------- |--------------	|----------	|
-| [`url`](#url-funnelback-url)         | `string` | `''`        	    | yes       |
-| [`collections`](#collections-funnelback-collection) | `array of strings` | `[]`   | yes       |
-| [`additionalFBparams`](#additionalfbparams-additional-parameters) | `object`   | `{}`          | no        |
-| [`activeFacetsOnStart`](#activefacetsonstart-active-facets-on-start) | `object`   | `{}`          | no        |
-| [`shouldFacetsFromUrlOverwriteActiveFacets`](#shouldfacetsfromurloverwriteactivefacets-active-facets-priority) | `boolean`   | `false`          | no        |
-| [`updateUrlOnSearch`](#updateurlonsearch-update-url-after-new-search) | `boolean`   | `true`          | no        |
-| [`keepSearchHistory`](#keepsearchhistory-keep-history-of-search-in-browser) | `boolean`   | `true`          | no        |
+| [`input`](1-configuration-1-general.md#input)                                               | `string/object`    | `''`                           | yes      |
+| [`inject`](1-configuration-1-general.md#inject)                                             | `string/object`    | `''`                           | yes      |
+| [`url`](1-configuration-1-general.md#url)                                                   | `string`           | `''`                           | yes      |
+| [`fb`](1-configuration-1-general.md#fb)                                                     | `array of objects` | `[]`                           | yes      |
+| [`scaffold`](1-configuration-1-general.md#scaffold)                                         | `function`         | `(templates) => {}`            | yes      |
+| [`showOnFront`](1-configuration-1-general.md#showOnFront)                                   | `string/number`    | `''`                           | no       |
+| [`trigger`](1-configuration-1-general.md#trigger)                                           | `string/number`    | `3`                            | no       |
+| [`threshold`](1-configuration-1-general.md#threshold)                                       | `number`           | `200`                          | no       |
+| [`highlight`](1-configuration-1-general.md#highlight)                                       | `boolean`          | `false`                        | no       |
+| [`accessibility`](1-configuration-1-general.md#accessibility)                               | `boolean`          | `true`                         | no       |
+| [`loader`](1-configuration-1-general.md#loader)                                             | `boolean`          | `false`                        | no       |
+| [`bindEvents`](1-configuration-1-general.md#bindEvents)                                     | `boolean`          | `false`                        | no       |
+| [`globalTemplates`](1-configuration-1-general.md#globaltemplates)                           | `object`           | `{}`                           | no       |
 
 ```js
-const mySearch = new Search.default({
+const concierge = new FBAC.default({
     // ... some configuration fields
-    url: 'http://showcase.funnelback.com/s/search.json',
-    collections: ['general-search'],
-    additionalFBparams: {
-      'profile': '_default',
+    input: "#search",
+    inject: "#fbac",
+    url: "https://mercator3-search01.squiz.co.uk/s/suggest.json",
+    fb: [
+        {
+            id: "test_name",
+            urlParts: {
+                collection: "push-meta-port-strategy"
+            },
+            display: {
+                headerOnNoResults: false,
+                footerOnNoResults: false
+            },
+            templates: {
+                results(iteratedResults, resultsClass) {
+                    return `
+                    <div class="fbac__autocomplete">
+                        <div class="${resultsClass}">
+                            ${iteratedResults}
+                        </div>
+                    </div>
+                    <div class="fbac__divider"></div>
+                  `;
+                }
+            }
+        }
+    ],
+    scaffold(templates) {
+        return `
+            ${templates.noResults}
+
+            ${templates.header}
+
+            <div class="fbac__headers">
+                ${templates.test_name.header}
+            </div>
+
+            <div class="fbac__all-results">
+                ${templates.test_name.results}
+                ${templates.test_name.noResults}
+            </div>
+
+            <div class="fbac__footers">
+                ${templates.test_name.footer}
+            </div>
+
+            ${templates.footer}
+        `;
     },
-    activeFacetsOnStart: {
-      'f.Category|category': 'Videos',
-      'f.Keyword|keyword': 'short',
-    },
-    shouldFacetsFromUrlOverwriteActiveFacets: true,
-    updateUrlOnSearch: false,
-    keepSearchHistory: false
+    showOnFront: 10,
+    trigger: 3,
+    threshold: 200,
+    highlight: true,
+    accessibility: true,
+    loader: false,
+    bindEvents: false,
+    globalTemplates: globalTemplates
     // ... some other configuration fields
 });
 
@@ -49,66 +100,183 @@ mySearch.init();
 ```
 
 
-## `url` - Funnelback url
+## `input`
 
-In this field you should paste the url of your funnelback endpoint.
+A string or a DOM element used to trigger the Autocomplete/Concierge fetch.
+    @example "#search"
+    @example document.querySelector('#search')
 
 | Parameter 	  | Type 	     | Default value 	| Required 	|
 |-------------	|----------- |--------------	|----------	|
-| `url`         | `string` | `''`        	    | yes       |
+| input     | `string/object`    | `''`  | yes      |
 
 #### Example
 
 ```js
-const mySearch = new Search.default({
+const concierge = new FBAC.default({
     // ... some configuration fields
-    url: 'http://showcase.funnelback.com/s/search.json',
+    input: "#search", //or "document.querySelector('#search')"
     // ... some other configuration fields
 });
 
 mySearch.init();
 ```
 
-> Make sure the url has no parameters and it finishes with .json extention (not html)
+## `inject`
 
-## `collections` - Funnelback collection
-
-In this field you should paste the name of collection from funnelback.
+A string or a DOM element used to inject the Autocomplete/Concierge parsed results.
 
 | Parameter 	  | Type 	     | Default value 	| Required 	|
 |-------------	|----------- |--------------	|----------	|
-| `collections` | `array of strings` | `[]`   | yes       |
+| inject | `string/object`    | `''`  | yes      |
+
 
 #### Example
 
 ```js
-const mySearch = new Search.default({
+const concierge = new FBAC.default({
     // ... some configuration fields
-    collections: ['general-search'],
+    inject: "#fbac", //or document.querySelector('#fbac')
     // ... some other configuration fields
 });
 
 mySearch.init();
 ```
 
-> As a legacy code, this field is still an array, but you should add only one collection inside
+## `url`
 
+Global Funnelback core URL.
 
-## `additionalFBparams` - Additional parameters
-
-If you want to pass some additional parameters in the url of your funnelback you can do it using `additionalFBparams` field.
-
-| Parameter 	         | Type 	    | Default value | Required 	|
-|--------------------- |----------- |--------------	|----------	|
-| `additionalFBparams` | `object`   | `{}`          | no        |
+| Parameter 	  | Type 	     | Default value 	| Required 	|
+|-------------	|----------- |--------------	|----------	|
+| url | `string`           | `''`                           | yes      |
 
 #### Example
 
 ```js
-const mySearch = new Search.default({
+const concierge = new FBAC.default({
     // ... some configuration fields
-    additionalFBparams: {
-      'profile': '_default',
+    url: "https://mercator3-search01.squiz.co.uk/s/suggest.json",
+    // ... some other configuration fields
+});
+
+mySearch.init();
+```
+
+ 
+
+## `fb`
+
+Holds individual Funnelback configurations.
+
+| Parameter 	  | Type 	     | Default value 	| Required 	|
+|-------------	|----------- |--------------	|----------	|
+| fb | `array of objects` | `[]`                           | yes      |
+
+
+#### Example
+
+```js
+const concierge = new FBAC.default({
+    // ... some configuration fields
+    fb: [
+        {
+            id: "test_name",
+            urlParts: {
+                collection: "push-meta-port-strategy"
+            },
+            display: {
+                headerOnNoResults: false,
+                footerOnNoResults: false
+            },
+            templates: {
+                results(iteratedResults, resultsClass) {
+                    return `
+                    <div class="fbac__autocomplete">
+                        <div class="${resultsClass}">
+                            ${iteratedResults}
+                        </div>
+                    </div>
+                    <div class="fbac__divider"></div>
+                  `;
+                }
+            }
+        },
+        {
+            id: "test_name_2"
+        },
+        {
+            id: "test_name_3",
+            templates: {
+                result(data, eventClass) {
+                    return `
+                    <a href="${data.action}" class="fbac__result ${eventClass}" target="_blank">
+                        ${data.disp.name}
+                    </a>
+                  `;
+                }
+            }
+        }
+    ],
+    // ... some other configuration fields
+});
+
+mySearch.init();
+```
+
+ 
+
+## `scaffold`
+
+Wraps all other templates into one scaffold template.
+
+| Parameter 	  | Type 	     | Default value 	| Required 	|
+|-------------	|----------- |--------------	|----------	|
+| scaffold | `function`         | `(templates) => {}`            | yes      |
+
+#### Example
+
+```js
+const concierge = new FBAC.default({
+    // ... some configuration fields
+    scaffold(templates) {
+        return `
+            ${templates.noResults}
+
+            ${templates.header}
+
+            <div class="fbac__headers">
+                ${templates.test_name.header}
+                ${templates.test_name_2.header}
+                ${templates.test_name_3.header}
+            </div>
+
+            <div class="fbac__all-results">
+
+
+            <div class="fbac__concierge fbac__concierge--no-border">
+            ${templates.test_name_2.results}
+            ${templates.test_name_2.noResults}
+            </div>
+            ${templates.test_name.results}
+
+                <div class="fbac__divider"></div>
+
+                <div class="fbac__concierge">
+                    ${templates.test_name_3.results}
+                    ${templates.test_name_3.noResults}
+                </div>
+
+            </div>
+
+            <div class="fbac__footers">
+                ${templates.test_name.footer}
+                ${templates.test_name_2.footer}
+                ${templates.test_name_3.footer}
+            </div>
+
+            ${templates.footer}
+        `;
     },
     // ... some other configuration fields
 });
@@ -116,89 +284,243 @@ const mySearch = new Search.default({
 mySearch.init();
 ```
 
-> Each parameter's name should be a key. Put value of parameter as a value of the attribute in `additionalFBparams` object.
+ 
 
-## `activeFacetsOnStart` - Active facets on start
+## `showOnFront`
 
-Sometimes you may need to make sure that some of the facets are preselected before user see search page. With this parameter you can set starting facets.
+Number which indicates how many results should be displayed on front-end.
 
-| Parameter 	          | Type 	     | Default value | Required  |
-|---------------------- |----------- |-------------- |---------- |
-| `activeFacetsOnStart` | `object`   | `{}`          | no        |
+| Parameter 	  | Type 	     | Default value 	| Required 	|
+|-------------	|----------- |--------------	|----------	|
+| showOnFront | `string/number`    | `''`                           | no       |
 
 #### Example
 
 ```js
-const mySearch = new Search.default({
+const concierge = new FBAC.default({
     // ... some configuration fields
-    activeFacetsOnStart: {
-      'f.Category|category': 'Videos',
-      'f.Keyword|keyword': 'short',
+    showOnFront: 10, //or "10"
+    // ... some other configuration fields
+});
+
+mySearch.init();
+```
+
+ 
+
+## `trigger`
+
+A string or a number used to define an amount of signs to trigger the Autocomplete/Concierge fetch.
+
+| Parameter 	  | Type 	     | Default value 	| Required 	|
+|-------------	|----------- |--------------	|----------	|
+| trigger | `string/number`    | `3`                            | no       |
+
+#### Example
+
+```js
+const concierge = new FBAC.default({
+    // ... some configuration fields
+    trigger: 3, //or "3"
+    // ... some other configuration fields
+});
+
+mySearch.init();
+```
+
+ 
+
+## `threshold`
+
+A milisecond representation of the threshold between inputting/removing signs.
+
+| Parameter 	  | Type 	     | Default value 	| Required 	|
+|-------------	|----------- |--------------	|----------	|
+| threshold | `number`           | `200`                          | no       |
+
+#### Example
+
+```js
+const concierge = new FBAC.default({
+    // ... some configuration fields
+    threshold: 200,
+    // ... some other configuration fields
+});
+
+mySearch.init();
+```
+
+ 
+
+## `highlight`
+
+Highlight all "query" occurs in results.
+
+| Parameter 	  | Type 	     | Default value 	| Required 	|
+|-------------	|----------- |--------------	|----------	|
+| highlight | `boolean`          | `false`                        | no       |
+
+
+#### Example
+
+```js
+const concierge = new FBAC.default({
+    // ... some configuration fields
+    highlight: true,
+    // ... some other configuration fields
+});
+
+mySearch.init();
+```
+
+ 
+
+## `accessibility`
+
+Accessibility tags, which are added only if they are not added manually.
+Tag list:
+
+1. tabindex="0" (iterable result)
+2. role="search" (form)
+3. role="combobox" (input)
+4. role="listbox" (results wrapper)
+5. role="option" (iterable result)
+6. aria-owns="inject" (input) id="inject" (results wrapper)
+7. aria-controls="idref" (input)
+8. aria-selected="true" (focused/hovered iterable result)
+9. aria-expanded="false" (input)
+10. aria-live="polite" (results wrapper)
+11. aria-activedescendant="idref1" (input) and id="idref1" (iterable result)
+12. aria-autocomplete="list" (input)
+13. aria-label="Search" (input)
+14. aria-haspopup="listbox" (input)
+15. autocomplete="off" (input)
+16. autocorrect="off" (input)
+17. autocapitalize="off" (input)
+18. spellcheck="false" (input)
+19. maxlength="1000" (input)
+20. autofocus="autofocus" (input)
+
+| Parameter 	  | Type 	     | Default value 	| Required 	|
+|-------------	|----------- |--------------	|----------	|
+| accessibility | `boolean`          | `true`                         | no       |
+
+
+#### Example
+
+```js
+const concierge = new FBAC.default({
+    // ... some configuration fields
+    accessibility: true,
+    // ... some other configuration fields
+});
+
+mySearch.init();
+```
+
+ 
+
+## `loader`
+
+Changes last loaded result for a loader upon searching new phrase.
+
+| Parameter 	  | Type 	     | Default value 	| Required 	|
+|-------------	|----------- |--------------	|----------	|
+| loader | `boolean`          | `false`                        | no       |
+
+
+#### Example
+
+```js
+const concierge = new FBAC.default({
+    // ... some configuration fields
+    loader: true,
+    // ... some other configuration fields
+});
+
+mySearch.init();
+```
+
+ 
+
+## `bindEvents`
+
+Gives access to the global "this" core object by changing scope.
+
+>Mutating core can cause issues.
+
+| Parameter 	  | Type 	     | Default value 	| Required 	|
+|-------------	|----------- |--------------	|----------	|
+| bindEvents | `boolean`          | `false`                        | no       |
+
+
+#### Example
+
+```js
+const concierge = new FBAC.default({
+    // ... some configuration fields
+    bindEvents: false,
+    // ... some other configuration fields
+});
+
+mySearch.init();
+```
+
+ 
+
+## `globalTemplates`
+
+Stores global templates.
+
+| Parameter 	  | Type 	     | Default value 	| Required 	|
+|-------------	|----------- |--------------	|----------	|
+| globalTemplates | `object`           | `{}`                           | no       |
+
+#### Example
+
+```js
+const concierge = new FBAC.default({
+    // ... some configuration fields
+    globalTemplates: globalTemplates,
+    // ... some other configuration fields
+});
+
+// Example of globalTemplates
+const globalTemplates = {
+    highlight(query) {
+        return `
+        <strong>${query}</strong>
+      `;
     },
-    // ... some other configuration fields
-});
-
-mySearch.init();
-```
-
-> The easiest way to find the correct key name is to go to your's endpoints html version, select the facet you need and copy the name of it from url
-
-## `shouldFacetsFromUrlOverwriteActiveFacets` - Active facets priority
-
-You can decide if facets selected in `activeFacetsOnStart` should always overwrite the ones selected by user after refresh.
-
-| Parameter 	          | Type 	     | Default value | Required  |
-|---------------------- |----------- |-------------- |---------- |
-| `shouldFacetsFromUrlOverwriteActiveFacets` | `boolean`   | `false`          | no        |
-
-#### Example
-
-```js
-const mySearch = new Search.default({
-    // ... some configuration fields
-    shouldFacetsFromUrlOverwriteActiveFacets: true
-    // ... some other configuration fields
-});
-
-mySearch.init();
-```
-
-## `updateUrlOnSearch` - Update url after new search
-
-If set to `true`, each time you make change in facets or query, url in browser will update with those parameters.
-
-| Parameter 	          | Type 	     | Default value | Required  |
-|---------------------- |----------- |-------------- |---------- |
-| `updateUrlOnSearch` | `boolean`   | `true`          | no        |
-
-#### Example
-
-```js
-const mySearch = new Search.default({
-    // ... some configuration fields
-    updateUrlOnSearch: false
-    // ... some other configuration fields
-});
-
-mySearch.init();
-```
-
-## `keepSearchHistory` - Keep history of search in browser
-
-If user will search for multiple queries, history of that search will be stored in browser.
-
-| Parameter 	          | Type 	     | Default value | Required  |
-|---------------------- |----------- |-------------- |---------- |
-| `keepSearchHistory` | `boolean`   | `true`          | no        |
-
-#### Example
-
-```js
-const mySearch = new Search.default({
-    // ... some configuration fields
-    keepSearchHistory: false
-    // ... some other configuration fields
-});
+    footer(query) {
+        return `
+        <div class="fbac__global-footer">
+          Visit our <a href="#">site</a>.
+        </div>
+      `;
+    },
+    header(query) {
+        return `
+        <div class="fbac__global-header">
+          Best Autocomplete/Concierge library for FB!
+        </div>
+      `;
+    },
+    noResults(query) {
+        return `
+        <div class="fbac__no-results">
+            No results were found in both searches for \`${query}\`.
+        </div>
+      `;
+    },
+    loader() {
+        return `
+          <div class="fbac__loader--wrapper">
+            <div class="fbac__loader"></div>
+          </div>
+        `;
+    }
+};
 
 mySearch.init();
 ```

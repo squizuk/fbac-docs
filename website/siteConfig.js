@@ -63,9 +63,9 @@ const siteConfig = {
   users,
 
   /* path to images for header/footer */
-  headerIcon: 'img/fbjs-logo.png',
-  footerIcon: 'img/fbjs-logo.png',
-  favicon: 'img/fbjs-logo.png',
+  headerIcon: 'img/fbac-logo.png',
+  footerIcon: 'img/fbac-logo.png',
+  favicon: 'img/fbac-logo.png',
 
   /* Colors for website */
   colors: {
@@ -112,8 +112,8 @@ const siteConfig = {
   docsSideNavCollapsible: true,
 
   // Open Graph and Twitter card images.
-  ogImage: 'img/fbjs-logo.png',
-  twitterImage: 'img/fbjs-logo.png',
+  ogImage: 'img/fbac-logo.png',
+  twitterImage: 'img/fbac-logo.png',
 
   // Show documentation's last contributor's name.
   enableUpdateBy: true,
