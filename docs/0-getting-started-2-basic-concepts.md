@@ -25,17 +25,25 @@ const concierge = new FBAC.default({
             ${templates.header}
 
             <div class="fbac__headers">
-                ${templates.test_name.header}
+                ${templates.testName1.header}
+                ${templates.testName2.header}
             </div>
 
             <div class="fbac__all-results">
-                ${templates.test_name.results}
-                ${templates.test_name.noResults}
+                ${templates.testName1.results}
+                ${templates.testName1.noResults}
 
+                <div class="fbac__concierge fbac__concierge--no-border">
+                ${templates.testName2.results}
+                ${templates.testName2.noResults}
+                </div>
+
+                <div class="fbac__divider"></div>
             </div>
 
             <div class="fbac__footers">
-                ${templates.test_name.footer}
+                ${templates.testName1.footer}
+                ${templates.testName2.footer}
             </div>
 
             ${templates.footer}
@@ -47,9 +55,13 @@ const concierge = new FBAC.default({
     },
     fb: [
         {
-            id: "test_name",
+            id: "testName1",
             urlParts: {
                 collection: "push-meta-port-strategy"
+            },
+            display: {
+                headerOnNoResults: false,
+                footerOnNoResults: false
             },
             templates: {
                 results(iteratedResults, resultsClass) {
@@ -63,6 +75,9 @@ const concierge = new FBAC.default({
                   `;
                 }
             }
+        },
+        {
+            id: "testName2"
         }
     ]
 });

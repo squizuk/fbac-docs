@@ -224,6 +224,114 @@ const concierge = new FBAC.default({
 mySearch.init();
 ```
 
+All objects from fb are inherits valuse of global config.
+So if we have one global URL and two collections to display, we need only put URL in global configuration
+and two separate collection on each of fb objects.
+
+This is a table of propertis that can be used in fb.
+
+| Parameter 	                  | Type 	           | Default value 	                | Required 	| Inheritance |
+|-------------------------------- |------------------- |------------------------------- |----------	| ----------- |
+| **fb globals**                  |                    |                                |           |             |
+| `id`                            | `string`           | `''`                           | yes       | no          |
+| `url`                           | `string`           | `''`                           | no        | yes         |
+| `showOnFront`                   | `string/number`    | `''`                           | no        | yes         |
+| `templates`                     | `object`           | `individualTemplates`          | no        | no          |
+| **Url Parts**                   |                    |                                |           |             |
+| `urlParts > collection`         | `string`           | `''`                           | no        | yes         |
+| `urlParts > profile`            | `string`           | `'_default'`                   | no        | yes         |
+| `urlParts > show`               | `string/number`    | `10`                           | no        | yes         |
+| `urlParts > sort`               | `string/number`    | `0`                            | no        | yes         |
+| **Display**                     |                    |                                |           |             |
+| `display > scaffoldOnNoResults` | `boolean`          | `true`                         | no        | yes         |
+| `display > headerOnNoResults`   | `boolean`          | `true`                         | no        | yes         |
+| `display > footerOnNoResults`   | `boolean`          | `true`                         | no        | yes         |
+
+
+On template part we can use those templates:
+
+```js
+export const individualTemplates = {
+    /**
+     * Individual footer template.
+     * @function
+     * @param {object} data - Data containing several informations about results.
+     *  @param {string} query - Partial query typed by user.
+     *  @param {number} results - Amount of results that are found.
+     */
+    footer(data) {
+        return `
+        <div class="fbac__footer">
+          ${data.results} results found.
+        </div>
+      `;
+    },
+    /**
+     * Individual header template.
+     * @function
+     * @param {object} data - Data containing several informations about results.
+     *  @param {string} query - Partial query typed by user.
+     *  @param {number} results - Amount of results that are found.
+     */
+    header(data) {
+        return `
+        <div class="fbac__header">
+          Searching for \`${data.query}\`...
+        </div>
+      `;
+    },
+    /**
+     * Template to handle results.
+     * @function
+     * @param {string} iteratedResults - Parsed results.
+     *  @see individualTemplates.result
+     */
+    results(iteratedResults, resultsClass) {
+        return `
+        <div class="${resultsClass}">
+          ${iteratedResults}
+        </div>
+      `;
+    },
+    /**
+     * Template of individual result.
+     * @function
+     * @param {object} data - Data returned from Funnelback.
+     * @param {string} eventClass - Class required for events to fire.
+     */
+    result(data, eventClass) {
+        return `
+        <a href="${data.action ||
+            "#"}" class="fbac__result ${eventClass}" target="_blank">
+            ${
+                data.disp.name
+                    ? `${data.disp.name}
+            <div class="fbac__category">
+              ${data.disp.category}
+            </div>
+            `
+                    : data.disp
+            }
+        </a>
+      `;
+    },
+    /**
+     * No results template.
+     * @function
+     */
+    noResults(query) {
+        return `
+        <div class="fbac__results">
+          <div class="fbac__no-result">
+            No results were found.
+          </div>
+        </div>
+      `;
+    }
+};
+
+```
+
  
 
 ## `scaffold`
@@ -282,6 +390,69 @@ const concierge = new FBAC.default({
 });
 
 mySearch.init();
+```
+
+Templates able to use on this part:
+
+```js
+const globalTemplates = {
+    /**
+     * Highlight template.
+     * @function
+     * @param {string} query - Partial query typed by user.
+     */
+    highlight(query) {
+        return `
+        <strong>${query}</strong>
+      `;
+    },
+    /**
+     * Global footer template.
+     * @function
+     * @param {string} query - Partial query typed by user.
+     */
+    footer(query) {
+        return `
+        <div class="fbac__global-footer">
+          Visit our <a href="#">site</a>.
+        </div>
+      `;
+    },
+    /**
+     * Global header template.
+     * @function
+     * @param {string} query - Partial query typed by user.
+     */
+    header(query) {
+        return `
+        <div class="fbac__global-header">
+          Best Autocomplete/Concierge library for FB!
+        </div>
+      `;
+    },
+    /**
+     * No results template.
+     * @function
+     */
+    noResults(query) {
+        return `
+        <div class="fbac__no-results">
+            No results were found in both searches for \`${query}\`.
+        </div>
+      `;
+    },
+    /**
+     * Loder template.
+     * @function
+     */
+    loader() {
+        return `
+          <div class="fbac__loader--wrapper">
+            <div class="fbac__loader"></div>
+          </div>
+        `;
+    }
+};
 ```
 
  
