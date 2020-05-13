@@ -10,7 +10,7 @@ const concierge = new FBAC.default({
     // your configuration
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 There are some general config fields that you will use to configure your fbac instance.
@@ -96,7 +96,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 
@@ -119,7 +119,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 ## `inject`
@@ -140,12 +140,14 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 ## `url`
 
 Global Funnelback core URL.
+
+>It passes a value to every individual instance, making it inheritable.
 
 | Parameter 	  | Type 	     | Default value 	| Required 	|
 |-------------	|----------- |--------------	|----------	|
@@ -160,7 +162,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
  
@@ -221,18 +223,16 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
-All objects from fb are inherits valuse of global config.
-So if we have one global URL and two collections to display, we need only put URL in global configuration
-and two separate collection on each of fb objects.
+Some fb values are inherited from the global config. Example: if a global url parameter is filled and there're two different fb instances to show (eg. autocomplete and concierge), they will inherit this url parameter to their own individual configuration. If one instance needs different url parameter, then it can be overridden inside own, individual config.
 
 This is a table of propertis that can be used in fb.
 
 | Parameter 	                  | Type 	           | Default value 	                | Required 	| Inheritance |
 |-------------------------------- |------------------- |------------------------------- |----------	| ----------- |
-| **fb globals**                  |                    |                                |           |             |
+| **FB globals**                  |                    |                                |           |             |
 | `id`                            | `string`           | `''`                           | yes       | no          |
 | `url`                           | `string`           | `''`                           | no        | yes         |
 | `showOnFront`                   | `string/number`    | `''`                           | no        | yes         |
@@ -389,7 +389,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 Templates able to use on this part:
@@ -461,6 +461,8 @@ const globalTemplates = {
 
 Number which indicates how many results should be displayed on front-end.
 
+>It passes a value to every individual instance, making it inheritable.
+
 | Parameter 	  | Type 	     | Default value 	| Required 	|
 |-------------	|----------- |--------------	|----------	|
 | showOnFront | `string/number`    | `''`                           | no       |
@@ -474,7 +476,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
  
@@ -496,7 +498,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
  
@@ -518,7 +520,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
  
@@ -541,7 +543,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
  
@@ -586,7 +588,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
  
@@ -609,7 +611,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
  
@@ -634,7 +636,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
  
@@ -693,5 +695,5 @@ const globalTemplates = {
     }
 };
 
-mySearch.init();
+concierge.init();
 ```

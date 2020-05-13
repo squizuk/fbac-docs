@@ -10,7 +10,7 @@ const concierge = new FBAC.default({
     // your configuration
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 There are some general config fields that you will use to configure your fbac instance.
@@ -38,7 +38,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 
@@ -61,7 +61,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 
@@ -84,7 +84,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 
@@ -107,7 +107,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 
@@ -130,7 +130,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 
@@ -153,5 +153,5 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```

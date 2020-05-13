@@ -10,10 +10,12 @@ const concierge = new FBAC.default({
     // your configuration
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 There are some general config fields that you will use to configure your fbac instance.
+
+>It passes a value to every individual instance, making it inheritable.
 
 ## Summary
 
@@ -36,7 +38,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 
@@ -59,7 +61,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 ## `profile`
@@ -82,7 +84,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 ## `show`
@@ -104,7 +106,7 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
 
 ## `sort`
@@ -129,5 +131,5 @@ const concierge = new FBAC.default({
     // ... some other configuration fields
 });
 
-mySearch.init();
+concierge.init();
 ```
