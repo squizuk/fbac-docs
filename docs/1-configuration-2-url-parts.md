@@ -3,7 +3,7 @@ id: urlParts
 title: Url Parts
 ---
 
-The whole object of configuration should be injected below the fbjs library file.
+The whole object of configuration should be injected below the fbac library file.
 
 ```js
 const concierge = new FBAC.default({
