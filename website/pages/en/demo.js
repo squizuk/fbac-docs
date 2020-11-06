@@ -17,16 +17,17 @@ class Demo extends React.Component {
     }
 
     render() {
-        return (<div className="docMainWrapper wrapper">
+        return (<div className="docMainWrapper wrapper demoWrapper">
             <script src="/js/fbac.js"></script>
             <script src="/js/fbac-config.js"></script>
             <Container>
-                <form>
+                <div className="fbac__note">Please note that the demo config has not been transpiled by Babel and therefore it won't work correctly on older browsers, such as IE9. The decision to not transpile the code has been made because of the better code readability (see <i>/js/fbac-config.js</i> script).</div>
+                <form className="fbac__form">
                     <input
                         type="text"
                         name="query"
                         id="search"
-                        autoComplete="off"
+                        autocomplete="off"
                     />
                     <button type="submit">Submit</button>
                 </form>

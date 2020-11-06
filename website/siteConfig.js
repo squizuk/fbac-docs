@@ -9,34 +9,13 @@
 // site configuration options.
 
 // List of projects/orgs using your project for the users page.
-const users = [
-  {
-    caption: 'Wood PLC',
-    infoLink: 'https://woodplc.com',
-    pinned: true,
-  },
-  {
-    caption: 'University of Arts',
-    infoLink: 'https://www.arts.ac.uk/',
-    pinned: true,
-  },
-  {
-    caption: 'Office of Rail and Road',
-    infoLink: 'http://orr.gov.uk',
-    pinned: true,
-  },
-  {
-    caption: 'Toolbox',
-    infoLink: 'http://toolbox.energyinst.org',
-    pinned: true,
-  },
-];
+const users = [];
 
 const siteConfig = {
   title: 'FBAC', // Title for your website.
   tagline: 'Documentation and tutorials for FBAC Library',
-  url: 'https://your-docusaurus-test-site.com', // Your website URL
-  repositoryUrl: '',
+  url: 'https://fbac.netlify.app/', // Your website URL
+  repositoryUrl: 'https://github.com/squizuk/fbac-docs',
   baseUrl: '/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',

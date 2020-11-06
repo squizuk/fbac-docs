@@ -44,9 +44,6 @@ class Footer extends React.Component {
               Configuration
             </a>
             {/* <a href={this.docUrl('overviewtemplates', this.props.language)}> */}
-            <a href={this.docUrl('overviewtemplate')}>
-              Templates
-            </a>
           </div>
           <div>
             <h5>More</h5>

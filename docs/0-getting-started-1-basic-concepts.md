@@ -1,3 +1,21 @@
+---
+id: basicconcepts
+title: Basic Concepts
+---
+
+There are two basic concepts related with FBAC that help you to create your own Funnelback autocomplete/concierge.
+
+In order to make FBAC work you need to [install FBAC](0-getting-started-0-installation.md), create HTML markup for an input bar and FBAC container, and create a configuration JavaScript with settings and templates.
+
+## Configuration
+
+Configuration is an object that has properties with their default values in FBAC. You need to provide some of them as required fields - rest is filled automatically by the library.
+
+## Example of a simple FBAC configuration
+
+> The presented configuration has two different endpoints and three outputs. FBAC fetches the suggest.json only once per collection - in this case two times.
+
+```js
 const concierge = new FBAC.default({
   input: "#search",
   inject: "#fbac",
@@ -92,6 +110,8 @@ const concierge = new FBAC.default({
   ]
 });
 
-setTimeout(() => {
-  concierge.init();
-}, 10);
+concierge.init();
+```
+
+> You will learn more about configuration in dedicated chapter.
+

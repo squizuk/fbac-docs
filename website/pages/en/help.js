@@ -42,7 +42,11 @@ function Help(props) {
         <div className="post">
           <header className="postHeader">
             <h1>Need help?</h1>
-            <p>If you still don't understand some of the concepts or you've found the bug<br /> either in FBAC or documentation, contact <a href="mailto:jsawczyszyn@squiz.pl">Jacek Sawczyszyn (jsawczyszyn@squiz.pl)</a> or <a href="mailto:ppaszkiewicz@squiz.pl">Przemek Paszkiewicz (ppaszkiewicz@squiz.pl)</a></p>
+            <p>If you still don't understand some of the concepts or you've found the bug either in FBAC or documentation, contact us:</p>
+            <ul>
+              <li><a href="mailto:jsawczyszyn@squiz.pl">Jacek Sawczyszyn (jsawczyszyn@squiz.pl)</a></li>
+              <li><a href="mailto:ppaszkiewicz@squiz.pl">Przemek Paszkiewicz (ppaszkiewicz@squiz.pl)</a></li>
+            </ul>
           </header>
           <GridBlock contents={supportLinks} layout="threeColumn" />
         </div>
