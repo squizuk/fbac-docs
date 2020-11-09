@@ -26,7 +26,7 @@ There are some general config fields that you will use to configure your FBAC in
 | [`input`](#input)                                               | `string/object`    | `''`                           | yes      | A string or a DOM element used to trigger the Autocomplete/Concierge fetch. |
 | [`inject`](#inject)                                             | `string/object`    | `''`                           | yes      | A string or a DOM element used to inject the Autocomplete/Concierge parsed results. |
 | [`url`](#url-global)                                                   | `string`           | `''`                           | yes*      | Global Funnelback core URL. If individual `url` is not set, global one will be used (see: `individualConfig.url`) |
-| [`showOnFront`](#showonfront-global)                                   | `string/number`    | `''`                           | no       | Number which indicates how many results should be displayed on front-end. Importance rules:  `individualConfig.showOnFront` > `globalConfig.showOnFront` > `individualConfig.urlParts.show` > `globalConfig.urlParts.show` |
+| [`showOnFront`](#showonfront-global)                                   | `string/number`    | `''`                           | no       | Number which indicates how many results should be displayed on front-end. |
 | [`urlParts`](#urlparts-global)                                   | `object`    | `{...}`                           | yes*       | Holds all global URL parameters. If individual `urlParts` are not set, global ones will be used (see: `individualConfig.urlParts` ). |
 | [`trigger`](#trigger)                                           | `string/number`    | `3`                            | no       | A string or a number used to define an amount of signs to trigger the Autocomplete/ Concierge fetch. |
 | [`threshold`](#threshold)                                       | `number`           | `200`                          | no       | A milisecond representation of the threshold between inputting/removing signs and fetching the data from FB. |
@@ -49,6 +49,7 @@ There are some general config fields that you will use to configure your FBAC in
 A string or a DOM element used to trigger the Autocomplete/Concierge fetch.
 
 Examples:
+
 * `"#search"`
 * `document.querySelector('#search')`
 
@@ -73,6 +74,7 @@ concierge.init();
 A string or a DOM element used to inject the Autocomplete/Concierge parsed results.
 
 Examples:
+
 * `"#fbac"`
 * `document.querySelector('#fbac')`
 
@@ -118,7 +120,12 @@ concierge.init();
 
 Number which indicates how many results should be displayed on front-end.
 
+Importance rules (what's prioritized if set up): 
+
+`individualConfig.showOnFront` > `globalConfig.showOnFront` > `individualConfig.urlParts.show` > `globalConfig.urlParts.show`
+
 Examples:
+
 * `"10"`
 * `10`
 
@@ -175,6 +182,7 @@ concierge.init();
 A string or a number used to define an amount of signs to trigger the Autocomplete/Concierge fetch.
 
 Examples:
+
 * `"3"`
 * `3`
 
@@ -380,7 +388,9 @@ concierge.init();
 
 ## `bindEvents`
 
-Gives access to the global `this` core object by changing scope. **Warning!** Mutating core can cause issues.
+Gives access to the global `this` core object by changing scope.
+
+> **Warning!** Mutating core can cause issues.
 
 | Parameter 	  | Type 	     | Default value 	| Required 	|
 |-------------	|----------- |--------------	|----------	|
@@ -504,6 +514,8 @@ concierge.init();
 
 Stores global templates.
 
+> Hint: you can define a template object outside the config and refer to it multiple times, having it defined only once!
+
 | Parameter 	                  | Type 	           | Default value 	                | Required | Description |
 |-------------------------------- |------------------- |------------------------------- |---------- |---------- |
 | `highlight`         | `function`           | `(query) => {...}`                           | no        | Highlight template. |
@@ -517,7 +529,7 @@ Stores global templates.
 ```js
 const concierge = new FBAC.default({
     // ... some configuration fields
-    events: {
+    globalTemplates: {
         highlight(query) {
             return `
                 <strong>${query}</strong>
@@ -597,7 +609,7 @@ concierge.init();
 |-------------	|----------- |--------------	|----------	|-------- |
 | [`id`](#id)                                               | `string`    | `''`                           | yes      | Unique, required identificator. |
 | [`url`](#url-individual)                                                   | `string`           | `''`                           | yes*      | Required Funnelback core URL. If individual `url` is not set, global one will be used (see: `globalConfig.url`) |
-| [`showOnFront`](#showonfront-individual)                                   | `string/number`    | `''`                           | no       | Number which indicates how many results should be displayed on front-end. Importance rules:  `individualConfig.showOnFront` > `globalConfig.showOnFront` > `individualConfig.urlParts.show` > `globalConfig.urlParts.show` |
+| [`showOnFront`](#showonfront-individual)                                   | `string/number`    | `''`                           | no       | Number which indicates how many results should be displayed on front-end. |
 | [`urlParts`](#urlparts-individual)                                   | `object`    | `{...}`                           | yes*       | Holds all individual URL parameters. If individual `urlParts` are not set, global ones will be used (see: `globalConfig.urlParts` ). |
 | [`templates`](#templates)                           | `object`           | `{...}`                           | no       | Stores individual templates. |
 | [`display`](#display-individual)                                   | `object`    | `{...}`                           | no       | Holds boolean variables for conditional displaying. |
@@ -606,6 +618,8 @@ concierge.init();
 ## `id`
 
 Unique, required identificator.
+
+> You refer to this ID in the `scaffold` template, eg. `${templates.example_id.header}`
 
 | Parameter 	  | Type 	     | Default value 	| Required 	|
 |-------------	|----------- |--------------	|----------	|
@@ -664,7 +678,12 @@ concierge.init();
 
 Number which indicates how many results should be displayed on front-end.
 
+Importance rules (what's prioritized if set up): 
+
+`individualConfig.showOnFront` > `globalConfig.showOnFront` > `individualConfig.urlParts.show` > `globalConfig.urlParts.show`
+
 Examples:
+
 * `"10"`
 * `10`
 
@@ -731,6 +750,8 @@ concierge.init();
 ## `templates`
 
 Stores individual templates.
+
+> Hint: you can define a template object outside the config and refer to it multiple times, having it defined only once!
 
 | Parameter 	                  | Type 	           | Default value 	                | Required | Description |
 |-------------------------------- |------------------- |------------------------------- |---------- |---------- |
