@@ -13,7 +13,7 @@ const users = [];
 
 const siteConfig = {
   title: 'FBAC', // Title for your website.
-  tagline: 'Documentation and tutorials for FBAC Library',
+  tagline: 'Documentation and tutorials for Funnelback Autocomplete/Concierge Library',
   url: 'https://fbac.netlify.app/', // Your website URL
   repositoryUrl: 'https://github.com/squizuk/fbac-docs',
   baseUrl: '/', // Base URL for your project */
@@ -30,7 +30,7 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    { doc: 'installation', label: 'Docs' },
+    { doc: 'basicconcepts', label: 'Docs' },
     // {doc: 'doc4', label: 'API'},
     { page: 'help', label: 'Help' },
     { blog: true, label: 'Changelog' },

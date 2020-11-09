@@ -156,10 +156,10 @@ class Index extends React.Component {
             title: `[Read documentation](${docUrl('installation')})`,
           },
           {
-            content: 'If you want to check details of the library you can go to `global/lib` repository.',
+            content: 'Download production-ready FBAC from `global/lib`. Remember to log in on GitLab before you proceed.',
             image: `${baseUrl}img/icon-search.svg`,
             imageAlign: 'top',
-            title: `[Go to repository](${siteConfig.repositoryUrl})`,
+            title: `[Download FBAC](https://gitlab.squiz.net/global/lib/-/tree/master/fbac)`,
           },
         ]}
       </Block>

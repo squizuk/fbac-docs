@@ -63,4 +63,4 @@ Make sure that a file that contains the configuration is located below FBAC scri
 
 If you are implementing your autocomplete in Matrix CMS, change your FBAC static file to the one from Git Bridge.
 
-[Read how to do it here](0-getting-started-0-installation.md#installing-fbac-in-matrix-cms)
+[Read how to do it here](0-getting-started-1-installation.md#installing-fbac-in-matrix-cms)

@@ -1,6 +1,6 @@
 {
   "docs": {
-    "Getting Started": ["installation", "basicconcepts", "tutorial"],
+    "Getting Started": ["basicconcepts", "installation", "tutorial"],
     "Configuration": ["overview", "configuration"]
   },
   "docs-other": {
