@@ -840,7 +840,7 @@ const concierge = new FBAC.default({
             // ... some individual configuration fields
             display: {
                 headerOnNoResults: true,
-                hoverIsFocus: false
+                footerOnNoResults: true
             },
             // ... some other configuration fields
         },
