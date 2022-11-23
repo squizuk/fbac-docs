@@ -29,9 +29,11 @@ There are some general config fields that you will use to configure your FBAC in
 | [`showOnFront`](#showonfront-global)                                   | `string/number`    | `''`                           | no       | Number which indicates how many results should be displayed on front-end. |
 | [`urlParts`](#urlparts-global)                                   | `object`    | `{...}`                           | yes*       | Holds all global URL parameters. If individual `urlParts` are not set, global ones will be used (see: `individualConfig.urlParts` ). |
 | [`trigger`](#trigger)                                           | `string/number`    | `3`                            | no       | A string or a number used to define an amount of signs to trigger the Autocomplete/ Concierge fetch. |
+| [`focusTrap`](#focustrap)                                   | `object`    | `{...}`                           | no       | Holds focus trap parameters. |
 | [`threshold`](#threshold)                                       | `number`           | `200`                          | no       | A milisecond representation of the threshold between inputting/removing signs and fetching the data from FB. |
 | [`highlight`](#highlight)                                       | `boolean`          | `false`                        | no       | Highlights all `query` occurrences in results. |
 | [`accessibility`](#accessibility)                               | `boolean`          | `true`                         | no       | Accessibility tags, which are added only if they are not added manually. |
+| [`arrowNavigation`](#arrowNavigation)                                       | `boolean`          | `true`                        | no       | Allows for full arrow navigation on results and input. |
 | [`loader`](#loader)                                             | `boolean`          | `false`                        | no       | Changes last loaded result for a loader upon searching new phrase. |
 | [`targetClass`](#targetClass)                                   | `object`    | `{...}`                           | no       | Stores all interactive classes. |
 | [`behaviour`](#behaviour)                                   | `object`    | `{...}`                           | no       | Stores default behaviours. |
@@ -202,6 +204,30 @@ const concierge = new FBAC.default({
 concierge.init();
 ```
 
+## `focusTrap`
+
+Holds parameters for focus trap.
+
+| Parameter 	                  | Type 	           | Default value 	                | Required | Description |
+|-------------------------------- |------------------- |------------------------------- |--------- |------------ |
+| `focusTrapSelector`         | `object/string`           | `''`                           | no        | A string or DOM object to define selector for focus trap. Focus trap should be a parent DOM element to the results and form input. |
+| `closeButtonSelector`            | `string`           | `''`                   | no        | A string to define selector for focus trap close button. A button should be child DOM element of focus trap. |
+
+#### Example
+
+```js
+const concierge = new FBAC.default({
+    // ... some configuration fields
+    focusTrap: {
+        focusTrapSelector: "#fbac-focustrap",
+        closeButtonSelector: "#fbac__close"
+    },
+    // ... some other configuration fields
+});
+
+concierge.init();
+```
+
 ## `threshold`
 
 A milisecond representation of the threshold between inputting/removing signs.
@@ -280,6 +306,26 @@ const concierge = new FBAC.default({
 concierge.init();
 ```
 
+## `arrowNavigation`
+
+Allows for full arrow navigation on results and input.
+
+| Parameter 	  | Type 	     | Default value 	| Required 	|
+|-------------	|----------- |--------------	|----------	|
+| `arrowNavigation` | `boolean`          | `true`                        | no       |
+
+
+#### Example
+
+```js
+const concierge = new FBAC.default({
+    // ... some configuration fields
+    arrowNavigation: true,
+    // ... some other configuration fields
+});
+
+concierge.init();
+```
 
 ## `loader`
 
@@ -422,6 +468,7 @@ Holds events that can be used by user in specific moments.
 | `afterFetch`               | `function`    | `(query, data) => {}`                           | no        | Fires right after data is fetched from Funnelback. |
 | `onResults`               | `function`    | `(query, data) => {}`                           | no        | Fires after data is fetched from Funnelback and built on the front-end. |
 | `onComplete`               | `function`    | `(query, data) => {}`                           | no        | Fires after every action is completed. |
+| `onSelect`               | `function`    | `(event, query, data) => {}`                           | no        | Fires after the select click/enter is performed on the single result. |
 
 #### Example
 
@@ -442,6 +489,9 @@ const concierge = new FBAC.default({
             // some code
         },
         onComplete(query, data) {
+            // some code
+        },
+        onSelect(event, query, data) {
             // some code
         }
     },
